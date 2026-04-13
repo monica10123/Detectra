@@ -109,20 +109,23 @@ You can access them here:
 
 ---
 
-📌 Overview
+## 📌 Overview
 
 Detectra is an AI-based system that detects scam messages using DistilBERT and explains predictions using LIME.
 
 ---
 
-👨‍💻 Contributors
-Monica D
-Akshatha G Dhongadi
-Naolin Gregory Vaz
-Manasavi
+## 👨‍💻 Contributors
+
+- Monica D  
+- Akshatha G Dhongadi  
+- Naolin Gregory Vaz  
+- Manasavi  
 
 ---
 
-🎯 Conclusion
+## 🎯 Conclusion
 
 Detectra combines Artificial Intelligence, cybersecurity, and explainability to create a reliable and transparent scam detection system. It enhances digital safety, builds user trust, and promotes awareness in modern communication systems.
+
+---
