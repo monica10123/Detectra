@@ -79,7 +79,7 @@ Detectra is an AI-powered system that:
 
 ## 🏗 Architecture
 
-
+```
 User Input (Text / Voice)
 ↓
 Translation (Multilingual → English)
@@ -94,6 +94,7 @@ LIME Explanation
 ↓
 UI Output + Analytics + Report
 
+```
 ---
 
 ## ▶️ Run Locally
