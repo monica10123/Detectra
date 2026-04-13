@@ -79,17 +79,17 @@ Detectra is an AI-powered system that:
 
 ## 🏗 Architecture
 User Input (Text / Voice)
-↓
+        ↓
 Translation (Multilingual → English)
-↓
+        ↓
 Tokenizer (DistilBERT)
-↓
+        ↓
 Classification Model
-↓
+        ↓
 Prediction (Scam / Genuine)
-↓
+        ↓
 LIME Explanation
-↓
+        ↓
 UI Output + Analytics + Report
 
 ---
