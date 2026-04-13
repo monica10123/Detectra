@@ -99,6 +99,7 @@ UI Output + Analytics + Report
 ```bash
 pip install -r requirements.txt
 streamlit run app.py
+```
 
 ⚠️ Note on Large Files
 Some project files (such as trained model files and datasets) exceed GitHub's file size limit (25MB), so they are not included in this repository.
