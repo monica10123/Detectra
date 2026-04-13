@@ -1,0 +1,80 @@
+🛡 DETECTRA Scam Detection Report
+============================================
+
+📊 SUMMARY
+--------------------------------------------
+Total Messages: 5
+Scam Detected: 3
+Genuine Messages: 2
+
+📜 DETAILED ANALYSIS
+============================================
+
+[Message 1]
+Time: 00:00
+Message: Your bank account will be blocked. Send OTP immediately.
+Result: SCAM
+LIME Explanation:
+  immediately → 0.132
+  Send → 0.128
+  OTP → 0.073
+  blocked → 0.068
+  account → 0.065
+  bank → 0.01
+
+--------------------------------------------
+
+[Message 2]
+Time: 00:06
+Message: आपका पैन कार्ड ब्लॉक हो गया है। तुरंत अपडेट करने के लिए यहाँ क्लिक करें।
+Result: SCAM
+LIME Explanation:
+  Click → 0.452
+  blocked → 0.223
+  updates → 0.146
+  instant → 0.071
+  card → 0.047
+  Your → 0.027
+
+--------------------------------------------
+
+[Message 3]
+Time: 00:17
+Message: Kal meeting hai 3 baje.
+Result: GENUINE
+LIME Explanation:
+  There → -0.0
+  clock → 0.0
+  tomorrow → -0.0
+  is → -0.0
+  o → -0.0
+  a → -0.0
+
+--------------------------------------------
+
+[Message 4]
+Time: 00:33
+Message: ನಾನು ಹಣವನ್ನು ಕಳುಹಿಸಿದ್ದೇನೆ, ಪರಿಶೀಲಿಸಿ.
+Result: GENUINE
+LIME Explanation:
+  money → -0.133
+  I → -0.131
+  sent → 0.04
+  check → 0.035
+
+--------------------------------------------
+
+[Message 5]
+Time: 00:42
+Message: உங்கள் சிம் கார்டு முடக்கப்பட்டுள்ளது. மீண்டும் செயல்படுத்த இங்கே கிளிக் செய்யவும்.
+Result: SCAM
+LIME Explanation:
+  Click → 0.42
+  reactivate → 0.299
+  disabled → 0.062
+  card → 0.045
+  Your → 0.031
+  SIM → 0.022
+
+--------------------------------------------
+

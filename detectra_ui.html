@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DETECTRA – Scam Detection</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    margin: 0;
+    background: #eef2f5;
+    padding: 30px;
+}
+
+/* -------- Cards -------- */
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1f2937;
+}
+
+/* -------- Input -------- */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+}
+
+button {
+    margin-top: 12px;
+    background: #f97316;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ea580c;
+}
+
+/* -------- Layout -------- */
+.flex {
+    display: flex;
+    gap: 20px;
+}
+
+.flex > div {
+    flex: 1;
+}
+
+/* -------- Output -------- */
+.scam {
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.genuine {
+    color: #16a34a;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.badge {
+    display: inline-block;
+    background: #ffedd5;
+    color: #9a3412;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+    margin-left: 6px;
+}
+
+/* -------- Graph -------- */
+.bar {
+    height: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #f97316;
+}
+
+/* -------- Hidden initially -------- */
+#resultSection {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= MAIN DASHBOARD ================= -->
+<div class="card">
+    <div class="section-title">Main Dashboard</div>
+    <input id="smsInput" type="text"
+        placeholder="Paste SMS or call message here...">
+    <button onclick="detectScam()">Detect Scam</button>
+</div>
+
+<!-- ================= RESULT SECTION ================= -->
+<div id="resultSection">
+
+    <div class="flex">
+
+        <!-- Output View -->
+        <div class="card">
+            <div class="section-title">Output View</div>
+            <div id="verdict" class="scam"></div>
+            <p id="messagePreview"></p>
+        </div>
+
+        <!-- Explanation Panel -->
+        <div class="card">
+            <div class="section-title">Explanation Panel</div>
+            <p><b>Word Importance</b></p>
+            <div id="dynamicGraph"></div>
+            <p style="font-size:13px;color:#6b7280;margin-top:12px;">
+                Explainable AI based on feature contribution
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function detectScam() {
+
+    const text = document.getElementById("smsInput").value.toLowerCase().trim();
+    if (text === "") {
+        alert("Please enter a message");
+        return;
+    }
+
+    // 🔹 Sensitive keywords
+    const sensitiveWords = {
+        "otp": 30,
+        "password": 40,
+        "pin": 40,
+        "bank": 15,
+        "account": 15,
+        "card": 30,
+        "cvv": 40
+    };
+
+    // 🔹 Intent phrases (VERY IMPORTANT)
+    const intentPhrases = [
+        "share your",
+        "send your",
+        "provide your",
+        "enter your",
+        "submit your",
+        "update your"
+    ];
+
+    let score = 0;
+    let foundWords = [];
+
+    // Keyword scoring
+    for (let word in sensitiveWords) {
+        if (text.includes(word)) {
+            score += sensitiveWords[word];
+            foundWords.push(word);
+        }
+    }
+
+    // Intent-based boosting
+    intentPhrases.forEach(phrase => {
+        if (text.includes(phrase)) {
+            score += 35; // strong penalty
+        }
+    });
+
+    if (score > 100) score = 100;
+
+    // Final decision
+    let verdictText, verdictClass;
+    if (score >= 50) {
+        verdictText = "SCAM";
+        verdictClass = "scam";
+    } else {
+        verdictText = "GENUINE";
+        verdictClass = "genuine";
+    }
+
+    // Show result section
+    document.getElementById("resultSection").style.display = "block";
+
+    // Verdict display
+    const verdictDiv = document.getElementById("verdict");
+    verdictDiv.className = verdictClass;
+    verdictDiv.innerHTML =
+        verdictText + `<span class="badge">${score}% Likelihood</span>`;
+
+    // Highlight detected words
+    let highlighted = text;
+    foundWords.forEach(word => {
+        const regex = new RegExp(`(${word})`, "gi");
+        highlighted = highlighted.replace(regex, "<b>$1</b>");
+    });
+    document.getElementById("messagePreview").innerHTML = highlighted;
+
+    // Graph
+    const graph = document.getElementById("dynamicGraph");
+    graph.innerHTML = "";
+
+    if (foundWords.length === 0) {
+        graph.innerHTML = "<p style='color:#6b7280'>No suspicious patterns detected</p>";
+    } else {
+        foundWords.forEach(word => {
+            const width = sensitiveWords[word];
+            graph.innerHTML += `
+                <div>${word}</div>
+                <div class="bar" style="width:${width}%"></div>
+            `;
+        });
+    }
+}
+</script>
+
+
+</body>
+</html>
