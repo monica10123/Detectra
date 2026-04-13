@@ -93,7 +93,6 @@ Prediction (Scam / Genuine)
 LIME Explanation
 ↓
 UI Output + Analytics + Report
-
 ```
 ---
 
